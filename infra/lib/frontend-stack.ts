@@ -45,7 +45,7 @@ export class FrontendStack extends cdk.Stack {
           containerPort: 3000,
           enableLogging: true
         },
-        domainName: 'wordcollect.haydenturek.com',
+        // domainName: 'wordcollect.haydenturek.com',
         domainZone: r53.HostedZone.fromHostedZoneId(
           this,
           'HostedZone',
