@@ -100,5 +100,9 @@
   "security-group:account=731219764303:region=us-east-1:securityGroupId=sg-051e0958f3e26b7ee": {
     "securityGroupId": "sg-051e0958f3e26b7ee",
     "allowAllOutbound": false
+  },
+  "security-group:account=731219764303:region=us-east-1:securityGroupName=word-collect-dev-alb-sg:vpcId=vpc-02d60f5abdceb2d25": {
+    "securityGroupId": "sg-051e0958f3e26b7ee",
+    "allowAllOutbound": false
   }
 }

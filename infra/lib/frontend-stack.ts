@@ -5,6 +5,7 @@ import * as ecs from 'aws-cdk-lib/aws-ecs'
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 import * as patterns from 'aws-cdk-lib/aws-ecs-patterns'
 import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets'
+import { ListenerCondition } from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 
 export interface FrontendStackProps extends cdk.StackProps {
   appName: string
@@ -57,15 +58,32 @@ export class FrontendStack extends cdk.Stack {
       }
     )
 
-    const listener = loadBalancer.listeners.filter(
-      (listener) => listener.port === 443
-    )[0]
+    const httpsListener =
+      elbv2.ApplicationListener.fromApplicationListenerAttributes(
+        this,
+        'HTTPSListener',
+        {
+          listenerArn: cdk.Fn.importValue(
+            `${appName}-${environment}-alb-https-listener-arn`
+          ),
+          securityGroup: ec2.SecurityGroup.fromLookupByName(
+            this,
+            'SecurityGroup',
+            `${appName}-${environment}-alb-sg`,
+            vpc
+          )
+        }
+      )
 
-    listener.addTargets('FrontendTarget', {
-      port: 8080,
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      targetGroupName: service.targetGroup.targetGroupName,
-      conditions: [elbv2.ListenerCondition.pathPatterns(['/'])]
-    })
+    const listenerRule = new elbv2.ApplicationListenerRule(
+      this,
+      'ListenerRule',
+      {
+        listener: httpsListener,
+        priority: 1,
+        action: elbv2.ListenerAction.forward([service.targetGroup]),
+        conditions: [elbv2.ListenerCondition.pathPatterns(['/'])]
+      }
+    )
   }
 }
