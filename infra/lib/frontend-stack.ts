@@ -33,7 +33,9 @@ export class FrontendStack extends cdk.Stack {
       this,
       'LoadBalancer',
       {
-        loadBalancerArn: cdk.Fn.importValue(`${appName}-${environment}-alb-arn`)
+        loadBalancerTags: {
+          Name: `${appName}-${environment}-alb`
+        }
       }
     )
 
