@@ -12,13 +12,14 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets'
 export interface FrontendStackProps extends cdk.StackProps {
   appName: string
   environment: string
+  domainName: string
 }
 
 export class FrontendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: FrontendStackProps) {
     super(scope, id, props)
 
-    const { appName, environment } = props
+    const { appName, environment, domainName } = props
 
     // Import shared infrastructure resources
     const vpc = ec2.Vpc.fromLookup(this, 'SharedVpc', {
@@ -32,11 +33,10 @@ export class FrontendStack extends cdk.Stack {
 
     const cluster = new ecs.Cluster(this, 'FrontendCluster', { vpc })
 
-    const hostedZone = r53.HostedZone.fromHostedZoneId(
-      this,
-      'HostedZone',
-      cdk.Fn.importValue(`${appName}-${environment}-hosted-zone-id`)
-    )
+    const hostedZone = r53.HostedZone.fromLookup(this, 'HostedZone', {
+      domainName,
+      privateZone: false
+    })
 
     const service = new patterns.ApplicationLoadBalancedFargateService(
       this,
@@ -51,7 +51,7 @@ export class FrontendStack extends cdk.Stack {
           containerPort: 3000,
           enableLogging: true
         },
-        // domainName: 'wordcollect.haydenturek.com',
+        domainName,
         domainZone: hostedZone,
         certificate: acm.Certificate.fromCertificateArn(
           this,
@@ -63,12 +63,5 @@ export class FrontendStack extends cdk.Stack {
         protocol: elbv2.ApplicationProtocol.HTTPS
       }
     )
-
-    const aRecord = new r53.ARecord(this, 'ARecord', {
-      zone: hostedZone,
-      target: r53.RecordTarget.fromIpAddresses(
-        service.loadBalancer.loadBalancerDnsName
-      )
-    })
   }
 }

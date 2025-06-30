@@ -6,6 +6,7 @@ const app = new cdk.App()
 
 const appName = 'word-collect'
 const environment = app.node.tryGetContext('environment') || 'dev'
+const domainName = 'wordcollect.haydenturek.com'
 
 const frontendStack = new FrontendStack(
   app,
@@ -13,6 +14,7 @@ const frontendStack = new FrontendStack(
   {
     appName,
     environment,
+    domainName,
     description: 'Frontend stack for frontend service',
     env: {
       account: process.env.CDK_DEFAULT_ACCOUNT,
