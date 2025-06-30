@@ -62,7 +62,7 @@ export class FrontendStack extends cdk.Stack {
           containerPort: 3000,
           enableLogging: true,
           environment: {
-            NEXT_PUBLIC_UPLOAD_SERVICE_URL: uploadApi
+            UPLOAD_SERVICE_URL: uploadApi
           }
         }
       }
