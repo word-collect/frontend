@@ -46,9 +46,11 @@ export class FrontendStack extends cdk.Stack {
           enableLogging: true
         },
         domainName: 'wordcollect.haydenturek.com',
-        domainZone: r53.HostedZone.fromLookup(this, 'HostedZone', {
-          domainName: 'wordcollect.haydenturek.com'
-        }),
+        domainZone: r53.HostedZone.fromHostedZoneId(
+          this,
+          'HostedZone',
+          cdk.Fn.importValue(`${appName}-${environment}-hosted-zone-id`)
+        ),
         certificate: acm.Certificate.fromCertificateArn(
           this,
           'Certificate',
