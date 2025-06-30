@@ -54,16 +54,18 @@ export class FrontendStack extends cdk.Stack {
           containerPort: 3000,
           enableLogging: true
         }
-        // domainName,
-        // domainZone: hostedZone,
-        // certificate: acm.Certificate.fromCertificateArn(
-        //   this,
-        //   'Certificate',
-        //   cdk.Fn.importValue(`${appName}-${environment}-certificate-arn`)
-        // ),
-        // redirectHTTP: true, // 80 → 443 (optional)
-        // protocol: elbv2.ApplicationProtocol.HTTPS
       }
     )
+
+    const listener = loadBalancer.listeners.filter(
+      (listener) => listener.port === 443
+    )[0]
+
+    listener.addTargets('FrontendTarget', {
+      port: 8080,
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      targetGroupName: service.targetGroup.targetGroupName,
+      conditions: [elbv2.ListenerCondition.pathPatterns(['/'])]
+    })
   }
 }
