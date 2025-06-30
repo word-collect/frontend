@@ -4,6 +4,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2'
 import * as ecs from 'aws-cdk-lib/aws-ecs'
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 import * as patterns from 'aws-cdk-lib/aws-ecs-patterns'
+import * as ssm from 'aws-cdk-lib/aws-ssm'
 import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets'
 import { ListenerCondition } from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 
@@ -40,6 +41,12 @@ export class FrontendStack extends cdk.Stack {
       }
     )
 
+    const uploadApi = ssm.StringParameter.fromStringParameterName(
+      this,
+      'UploadApiParam',
+      '/wordcollect/upload-service/apiEndpoint'
+    ).stringValue
+
     const service = new patterns.ApplicationLoadBalancedFargateService(
       this,
       'FrontendService',
@@ -53,7 +60,10 @@ export class FrontendStack extends cdk.Stack {
         taskImageOptions: {
           image: ecs.ContainerImage.fromDockerImageAsset(imageAsset),
           containerPort: 3000,
-          enableLogging: true
+          enableLogging: true,
+          environment: {
+            NEXT_PUBLIC_UPLOAD_SERVICE_URL: uploadApi
+          }
         }
       }
     )
