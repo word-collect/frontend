@@ -1,0 +1,2 @@
+# frontend
+word-collect frontend
