@@ -32,7 +32,13 @@ export class FrontendStack extends cdk.Stack {
 
     const cluster = new ecs.Cluster(this, 'FrontendCluster', { vpc })
 
-    new patterns.ApplicationLoadBalancedFargateService(
+    const hostedZone = r53.HostedZone.fromHostedZoneId(
+      this,
+      'HostedZone',
+      cdk.Fn.importValue(`${appName}-${environment}-hosted-zone-id`)
+    )
+
+    const service = new patterns.ApplicationLoadBalancedFargateService(
       this,
       'FrontendService',
       {
@@ -46,11 +52,7 @@ export class FrontendStack extends cdk.Stack {
           enableLogging: true
         },
         // domainName: 'wordcollect.haydenturek.com',
-        domainZone: r53.HostedZone.fromHostedZoneId(
-          this,
-          'HostedZone',
-          cdk.Fn.importValue(`${appName}-${environment}-hosted-zone-id`)
-        ),
+        domainZone: hostedZone,
         certificate: acm.Certificate.fromCertificateArn(
           this,
           'Certificate',
@@ -61,5 +63,12 @@ export class FrontendStack extends cdk.Stack {
         protocol: elbv2.ApplicationProtocol.HTTPS
       }
     )
+
+    const aRecord = new r53.ARecord(this, 'ARecord', {
+      zone: hostedZone,
+      target: r53.RecordTarget.fromIpAddresses(
+        service.loadBalancer.loadBalancerDnsName
+      )
+    })
   }
 }
