@@ -82,15 +82,7 @@ export class FrontendStack extends cdk.Stack {
         listener: httpsListener,
         priority: 1,
         action: elbv2.ListenerAction.forward([service.targetGroup]),
-        conditions: [
-          elbv2.ListenerCondition.pathPatterns([
-            '/', // index page
-            '/_next/*', // Next.js internals
-            '/static/*', // public/static
-            '/favicon.ico',
-            '/robots.txt'
-          ])
-        ]
+        conditions: [elbv2.ListenerCondition.pathPatterns(['/*'])]
       }
     )
   }
