@@ -22,19 +22,18 @@ export class FrontendStack extends cdk.Stack {
     /* ────────────────────────────────────────────────
        1. Look up shared values we wrote in AuthStack
        ──────────────────────────────────────────────── */
-    const uploadApi = ssm.StringParameter.valueForStringParameter(
-      this,
-      `/${appName}/${environment}/upload-service/api-endpoint`
-    )
-
-    const clientId = ssm.StringParameter.valueForStringParameter(
+    /* 1. replace valueForStringParameter → valueFromLookup for build-time vars */
+    const clientId = ssm.StringParameter.valueFromLookup(
       this,
       `/${appName}/${environment}/user-service/appClientId`
     )
-
-    const userPoolId = ssm.StringParameter.valueForStringParameter(
+    const userPoolId = ssm.StringParameter.valueFromLookup(
       this,
       `/${appName}/${environment}/user-service/userPoolId`
+    )
+    const uploadApi = ssm.StringParameter.valueFromLookup(
+      this,
+      `/${appName}/${environment}/upload-service/api-endpoint`
     )
 
     const authSecret = ssm.StringParameter.fromSecureStringParameterAttributes(
