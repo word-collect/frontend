@@ -9,7 +9,7 @@ let cached: string | undefined
 
 export async function getWsEndpoint(): Promise<string> {
   if (cached) return cached
-  const paramName = `/wordcollect/dev/notification-service/ws-endpoint` // ⇽ change env
+  const paramName = `/word-collect/dev/notification-service/ws-endpoint` // ⇽ change env
   const { Parameter } = await ssm.send(
     new GetParameterCommand({ Name: paramName })
   )

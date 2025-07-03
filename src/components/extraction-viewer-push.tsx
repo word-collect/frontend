@@ -29,7 +29,15 @@ export default function ExtractionViewerPush({
     )
   }
 
+  const splitText = text.split(',')
+
   return (
-    <pre className="whitespace-pre-wrap rounded-lg bg-gray-100 p-4">{text}</pre>
+    <ul>
+      {splitText.map((item) => (
+        <li key={item} className="text-white-500">
+          {item}
+        </li>
+      ))}
+    </ul>
   )
 }
