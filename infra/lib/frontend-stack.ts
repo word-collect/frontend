@@ -54,11 +54,6 @@ export class FrontendStack extends cdk.Stack {
       vpcName: `${appName}-${environment}-vpc`
     })
 
-    const imageAsset = new DockerImageAsset(this, 'FrontendImage', {
-      directory: '..', // repo root where Dockerfile lives
-      file: 'Dockerfile'
-    })
-
     const cluster = new ecs.Cluster(this, 'FrontendCluster', { vpc })
 
     const loadBalancer = elbv2.ApplicationLoadBalancer.fromLookup(
@@ -70,6 +65,18 @@ export class FrontendStack extends cdk.Stack {
         }
       }
     )
+
+    const imageAsset = new DockerImageAsset(this, 'FrontendImage', {
+      directory: '..', // repo root where Dockerfile lives
+      file: 'Dockerfile',
+      buildArgs: {
+        NEXT_PUBLIC_COGNITO_CLIENT_ID: clientId,
+        NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
+        NEXT_PUBLIC_AWS_REGION: this.region,
+        NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
+        NEXTAUTH_URL: 'https://wordcollect.haydenturek.com' // server var also needed at build
+      }
+    })
 
     const service = new patterns.ApplicationLoadBalancedFargateService(
       this,
@@ -91,13 +98,13 @@ export class FrontendStack extends cdk.Stack {
           enableLogging: true,
           environment: {
             UPLOAD_SERVICE_URL: uploadApi,
-            /* public-runtime vars (exposed to browser bundle at build time) */
-            NEXT_PUBLIC_COGNITO_CLIENT_ID: clientId,
-            NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
-            NEXT_PUBLIC_AWS_REGION: this.region,
-            NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
-            /* server-only vars */
-            NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
+            // /* public-runtime vars (exposed to browser bundle at build time) */
+            // NEXT_PUBLIC_COGNITO_CLIENT_ID: clientId,
+            // NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
+            // NEXT_PUBLIC_AWS_REGION: this.region,
+            // NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
+            // /* server-only vars */
+            // NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
             AUTH_TRUST_HOST: 'true'
           },
           secrets: {
