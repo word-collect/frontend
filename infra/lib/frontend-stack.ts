@@ -81,6 +81,10 @@ export class FrontendStack extends cdk.Stack {
         cpu: 512,
         memoryLimitMiB: 1024,
         desiredCount: 2,
+        circuitBreaker: {
+          rollback: true
+        },
+        healthCheckGracePeriod: cdk.Duration.seconds(60),
         taskImageOptions: {
           image: ecs.ContainerImage.fromDockerImageAsset(imageAsset),
           containerPort: 3000,
