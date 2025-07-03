@@ -97,7 +97,8 @@ export class FrontendStack extends cdk.Stack {
             NEXT_PUBLIC_AWS_REGION: this.region,
             NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
             /* server-only vars */
-            NEXTAUTH_URL: `https://wordcollect.haydenturek.com`
+            NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
+            AUTH_TRUST_HOST: 'true'
           },
           secrets: {
             /* pulled from SSM SecureString → injected as env at runtime */
