@@ -19,6 +19,36 @@ export class FrontendStack extends cdk.Stack {
 
     const { appName, environment } = props
 
+    /* ────────────────────────────────────────────────
+       1. Look up shared values we wrote in AuthStack
+       ──────────────────────────────────────────────── */
+    const uploadApi = ssm.StringParameter.valueForStringParameter(
+      this,
+      `/${appName}/${environment}/upload-service/api-endpoint`
+    )
+
+    const clientId = ssm.StringParameter.valueForStringParameter(
+      this,
+      `/${appName}/${environment}/user-service/appClientId`
+    )
+
+    const userPoolId = ssm.StringParameter.valueForStringParameter(
+      this,
+      `/${appName}/${environment}/user-service/userPoolId`
+    )
+
+    const authSecret = ssm.StringParameter.fromSecureStringParameterAttributes(
+      this,
+      'AuthSecretParam',
+      {
+        parameterName: `/${appName}/${environment}/auth/secret`,
+        version: 1 // <- bump when you rotate
+      }
+    )
+
+    /* Hosted-UI domain follows the pattern we used in AuthStack */
+    const cognitoDomain = `${appName}-${environment}-auth.auth.us-east-1.amazoncognito.com`
+
     // Import shared infrastructure resources
     const vpc = ec2.Vpc.fromLookup(this, 'SharedVpc', {
       vpcName: `${appName}-${environment}-vpc`
@@ -41,12 +71,6 @@ export class FrontendStack extends cdk.Stack {
       }
     )
 
-    const uploadApi = ssm.StringParameter.fromStringParameterName(
-      this,
-      'UploadApiParam',
-      '/wordcollect/upload-service/apiEndpoint'
-    ).stringValue
-
     const service = new patterns.ApplicationLoadBalancedFargateService(
       this,
       'FrontendService',
@@ -62,7 +86,18 @@ export class FrontendStack extends cdk.Stack {
           containerPort: 3000,
           enableLogging: true,
           environment: {
-            UPLOAD_SERVICE_URL: uploadApi
+            UPLOAD_SERVICE_URL: uploadApi,
+            /* public-runtime vars (exposed to browser bundle at build time) */
+            NEXT_PUBLIC_COGNITO_CLIENT_ID: clientId,
+            NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
+            NEXT_PUBLIC_AWS_REGION: this.region,
+            NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
+            /* server-only vars */
+            NEXTAUTH_URL: `https://wordcollect.haydenturek.com`
+          },
+          secrets: {
+            /* pulled from SSM SecureString → injected as env at runtime */
+            AUTH_SECRET: ecs.Secret.fromSsmParameter(authSecret)
           }
         }
       }
