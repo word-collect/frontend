@@ -6,7 +6,7 @@ import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2'
 import * as patterns from 'aws-cdk-lib/aws-ecs-patterns'
 import * as ssm from 'aws-cdk-lib/aws-ssm'
 import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets'
-import { ListenerCondition } from 'aws-cdk-lib/aws-elasticloadbalancingv2'
+import * as iam from 'aws-cdk-lib/aws-iam'
 
 export interface FrontendStackProps extends cdk.StackProps {
   appName: string
@@ -65,6 +65,19 @@ export class FrontendStack extends cdk.Stack {
       }
     )
 
+    // task role with SSM read
+    const taskRole = new iam.Role(this, 'FrontendTaskRole', {
+      assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com')
+    })
+    taskRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ['ssm:GetParameter', 'ssm:GetParameters'],
+        resources: [
+          `arn:aws:ssm:${this.region}:${this.account}:parameter/${appName}/${environment}/notification-service/*`
+        ]
+      })
+    )
+
     const imageAsset = new DockerImageAsset(this, 'FrontendImage', {
       directory: '..', // repo root where Dockerfile lives
       file: 'Dockerfile',
@@ -73,7 +86,7 @@ export class FrontendStack extends cdk.Stack {
         NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
         NEXT_PUBLIC_AWS_REGION: this.region,
         NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
-        NEXTAUTH_URL: 'https://wordcollect.haydenturek.com' // server var also needed at build
+        NEXTAUTH_URL: 'https://wordcollect.haydenturek.com' // needed at build and runtime
       }
     })
 
@@ -92,18 +105,13 @@ export class FrontendStack extends cdk.Stack {
         },
         healthCheckGracePeriod: cdk.Duration.seconds(60),
         taskImageOptions: {
+          taskRole,
           image: ecs.ContainerImage.fromDockerImageAsset(imageAsset),
           containerPort: 3000,
           enableLogging: true,
           environment: {
             UPLOAD_SERVICE_URL: uploadApi,
-            // /* public-runtime vars (exposed to browser bundle at build time) */
-            // NEXT_PUBLIC_COGNITO_CLIENT_ID: clientId,
-            // NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
-            // NEXT_PUBLIC_AWS_REGION: this.region,
-            // NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
-            // /* server-only vars */
-            // NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
+            NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
             AUTH_TRUST_HOST: 'true'
           },
           secrets: {
