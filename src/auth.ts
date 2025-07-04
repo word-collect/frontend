@@ -46,7 +46,33 @@ export const {
      * 1. Persist Cognito’s ID token on every sign-in
      */
     async jwt({ token, account }) {
-      if (account?.id_token) token.id_token = account.id_token
+      if (account) {
+        token.id_token = account.id_token
+        token.refresh_token = account.refresh_token // ⬅ NEW
+        token.access_token = account.access_token // (optional)
+        token.expires_at = account.expires_at // epoch seconds
+      }
+
+      /* ① refresh 5 min before expiry */
+      const FIVE_MIN = 5 * 60
+      if (Date.now() / 1000 > (token.expires_at ?? 0) - FIVE_MIN) {
+        const res = await fetch(
+          `https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/token`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+              grant_type: 'refresh_token',
+              client_id: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
+              refresh_token: token.refresh_token as string
+            })
+          }
+        ).then((r) => r.json())
+
+        token.id_token = res.id_token
+        token.access_token = res.access_token
+        token.expires_at = Date.now() / 1000 + res.expires_in
+      }
       return token
     },
 
@@ -54,7 +80,8 @@ export const {
      * 2. Expose it to the client‐side session object
      */
     async session({ session, token }) {
-      session.id_token = token.id_token as string | undefined
+      session.id_token = token.id_token as string
+      session.access_token = token.access_token as string | undefined
       return session
     }
   }

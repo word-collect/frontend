@@ -9,10 +9,14 @@ export default function WordList() {
   const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
-    if (status === 'authenticated' && !initialized) {
-      listWords().then(setItems)
-      setInitialized(true)
+    async function init() {
+      if (status === 'authenticated' && !initialized) {
+        const items = await listWords()
+        if (items) setItems(items)
+        setInitialized(true)
+      }
     }
+    init()
   }, [status, initialized])
 
   async function add() {
