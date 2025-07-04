@@ -35,6 +35,10 @@ export class FrontendStack extends cdk.Stack {
       this,
       `/${appName}/${environment}/upload-service/api-endpoint`
     )
+    const collectionApi = ssm.StringParameter.valueFromLookup(
+      this,
+      `/${appName}/${environment}/collection-service/api-endpoint`
+    )
 
     const authSecret = ssm.StringParameter.fromSecureStringParameterAttributes(
       this,
@@ -77,6 +81,14 @@ export class FrontendStack extends cdk.Stack {
         ]
       })
     )
+    taskRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ['ssm:GetParameter', 'ssm:GetParameters'],
+        resources: [
+          `arn:aws:ssm:${this.region}:${this.account}:parameter/${appName}/${environment}/collection-service/*`
+        ]
+      })
+    )
 
     const imageAsset = new DockerImageAsset(this, 'FrontendImage', {
       directory: '..', // repo root where Dockerfile lives
@@ -86,6 +98,7 @@ export class FrontendStack extends cdk.Stack {
         NEXT_PUBLIC_COGNITO_USER_POOL_ID: userPoolId,
         NEXT_PUBLIC_AWS_REGION: this.region,
         NEXT_PUBLIC_COGNITO_DOMAIN: cognitoDomain,
+        NEXT_PUBLIC_COLLECTION_SERVICE_URL: collectionApi,
         NEXTAUTH_URL: 'https://wordcollect.haydenturek.com' // needed at build and runtime
       }
     })

@@ -1,5 +1,6 @@
 import LoginButton from '@/components/login-button'
 import { Uploader } from '@/components/uploader'
+import WordList from '@/components/word-saver'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,6 +11,7 @@ export default function Home() {
         <div>
           <LoginButton />
           <Uploader />
+          <WordList />
         </div>
       </main>
     </div>

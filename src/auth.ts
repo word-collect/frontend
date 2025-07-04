@@ -30,9 +30,6 @@ export const {
     Cognito({
       id: 'cognito',
       ...base
-
-      // client: { token_endpoint_auth_method: 'none' }
-      // client: { token_endpoint_auth_method: 'none' }
     }),
     Cognito({
       id: 'cognito-signup',
@@ -42,19 +39,23 @@ export const {
         params: { scope: 'openid profile email' }
       }
     })
-    // Cognito({
-    //   id: 'cognito-signup',
-    //   clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
-    //   issuer: `https://cognito-idp.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID}`,
-    //   checks: ['pkce'],
-    //   authorization: {
-    //     url: `https://${process.env.NEXT_PUBLIC_COGNITO_DOMAIN}/signup`,
-    //     params: {
-    //       scope: 'openid profile email'
-    //       // redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/cognito-signup`
-    //     }
-    //   }
-    // })
   ],
-  session: { strategy: 'jwt' } // same as before
+  session: { strategy: 'jwt' }, // same as before
+  callbacks: {
+    /**
+     * 1. Persist Cognito’s ID token on every sign-in
+     */
+    async jwt({ token, account }) {
+      if (account?.id_token) token.id_token = account.id_token
+      return token
+    },
+
+    /**
+     * 2. Expose it to the client‐side session object
+     */
+    async session({ session, token }) {
+      session.id_token = token.id_token as string | undefined
+      return session
+    }
+  }
 })
