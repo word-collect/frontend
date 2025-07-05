@@ -2,6 +2,7 @@
 import { auth } from '@/auth' // ← your export from auth.ts
 import { redirect } from 'next/navigation'
 import type { ReactNode } from 'react'
+import { Suspense } from 'react'
 import Content from '@/components/content'
 import Navbar from '@/components/navbar'
 
@@ -18,7 +19,10 @@ export default async function ProtectedLayout({
   // 2️⃣ you can read `session.user` here for role-based gating, etc.
   return (
     <main className="flex h-screen flex-col">
-      <Navbar />
+      {/* <main className="flex h-screen flex-col h-screen overflow-hidden"> */}
+      <Suspense fallback={<div className="h-16" />}>
+        <Navbar />
+      </Suspense>
       <div className="flex-1 overflow-y-auto overscroll-contain pt-4">
         {children}
       </div>
