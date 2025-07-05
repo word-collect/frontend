@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Features', href: '/features' },
   { name: 'Architecture', href: '/architecture' },
   { name: 'About', href: '/about' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/haydenturek/' }
+  { name: 'GitHub', href: 'https://github.com/word-collect' }
 ]
 
 export default function Example() {
@@ -142,7 +142,7 @@ export default function Example() {
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
-                Project code is public on github.{' '}
+                Project code is public on GitHub.{' '}
                 <a
                   href="https://github.com/word-collect"
                   className="font-semibold text-white"
@@ -170,9 +170,12 @@ export default function Example() {
                 >
                   Get started
                 </span>
-                <a href="#" className="text-sm/6 font-semibold text-white">
+                <Link
+                  href="/about"
+                  className="text-sm/6 font-semibold text-white"
+                >
                   Learn more <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

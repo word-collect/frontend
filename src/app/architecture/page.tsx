@@ -6,6 +6,9 @@ import {
   LockClosedIcon,
   ServerIcon
 } from '@heroicons/react/20/solid'
+// import SvgPanZoom from '@/components/svg-pan-zoom'
+import Diagram from '@/components/diagram'
+import Link from 'next/link'
 
 const features = [
   {
@@ -50,29 +53,28 @@ export default function Example() {
   return (
     <div className="bg-gray-900 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-4">
+          <Link href="/" className="text-lg/8 text-gray-300">
+            ← Home
+          </Link>
+        </div>
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-base/7 font-semibold text-indigo-400">
-            Everything you need
+            Ready to scale
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl sm:text-balance">
-            No server? No problem.
+            Event-driven. Split-repo.
           </p>
           <p className="mt-6 text-lg/8 text-gray-300">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate
-            blanditiis.
+            Developed with modern architecural practices and tools to deliver a
+            minimal yet robust and cost-efficient solution that is easy to
+            maintain and expand.
           </p>
         </div>
       </div>
       <div className="relative overflow-hidden pt-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <img
-            alt="App screenshot"
-            src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
-            width={2432}
-            height={1442}
-            className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
-          />
+          <Diagram src="/architecture.svg" />
           <div aria-hidden="true" className="relative">
             <div className="absolute -inset-x-20 bottom-0 bg-linear-to-t from-gray-900 pt-[7%]" />
           </div>

@@ -1,7 +1,14 @@
+import Link from 'next/link'
+
 export default function Example() {
   return (
     <div className="bg-gray-900 py-24 sm:py-32 h-screen">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-4">
+          <Link href="/" className="text-lg/8 text-gray-300">
+            ← Home
+          </Link>
+        </div>
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">
             About
