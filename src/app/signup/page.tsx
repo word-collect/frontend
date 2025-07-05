@@ -5,7 +5,9 @@ import { signIn } from 'next-auth/react'
 
 export default function RedirectToSignup() {
   useEffect(() => {
-    signIn('cognito')
+    signIn('cognito-signup', {
+      callbackUrl: '/collection'
+    })
   }, [])
   return <p>Redirecting to sign-up…</p>
 }

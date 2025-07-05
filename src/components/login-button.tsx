@@ -22,8 +22,14 @@ export default function AuthButtons() {
     <button onClick={handleFullLogout}>Sign out</button>
   ) : (
     <>
-      <button onClick={() => signIn('cognito')}>Sign in</button>
-      <button onClick={() => signIn('cognito-signup')}>Sign up</button>
+      <button onClick={() => signIn('cognito', { callbackUrl: '/collection' })}>
+        Sign in
+      </button>
+      <button
+        onClick={() => signIn('cognito-signup', { callbackUrl: '/collection' })}
+      >
+        Sign up
+      </button>
     </>
   )
 }

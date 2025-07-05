@@ -8,10 +8,7 @@ import { EVENT_TYPES } from '@/constants'
 /* --- helper to fetch once via SWR --- */
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-export function useAnalysisSocket(
-  uploadId: string | undefined, // the S3 key you care about
-  onMessage?: (result: string) => void // optional side-effect
-) {
+export function useAnalysisSocket() {
   /* 1️⃣  grab the wss:// URL from your API route  */
   const { data } = useSWR('/api/ws-url', fetcher) // { wsUrl }
   /* 2️⃣  get the ID-token from next-auth            */
@@ -23,7 +20,7 @@ export function useAnalysisSocket(
 
   // (1) open the WebSocket when we have both wsUrl + uploadId
   useEffect(() => {
-    if (!data?.wsUrl || !uploadId || !idToken) return
+    if (!data?.wsUrl || !idToken) return
 
     if (socketRef.current && socketRef.current.readyState < WebSocket.CLOSING) {
       return
@@ -43,13 +40,10 @@ export function useAnalysisSocket(
       try {
         const msg = JSON.parse(evt.data) // { s3Key, result }
         const eventType = msg.eventType
-        console.log(eventType)
 
-        onMessage?.(eventType)
+        setLatest(eventType)
 
         if (eventType === EVENT_TYPES.COLLECTION_UPDATED) {
-          setLatest(msg.result)
-          onMessage?.(eventType)
           ws.close(1000, 'done')
         }
       } catch {
@@ -66,7 +60,7 @@ export function useAnalysisSocket(
       ws.close()
       socketRef.current = null
     }
-  }, [data?.wsUrl, uploadId, idToken])
+  }, [data?.wsUrl, idToken])
 
   return latest // null until message arrives
 }

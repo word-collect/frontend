@@ -1,44 +1,69 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useAnalysisSocket } from '@/hooks/use-analysis-socket'
+import { EVENT_TYPES } from '@/constants'
+import { useRouter } from 'next/navigation'
 
-/**
- * Displays the Bedrock analysis result in real time.
- * – Connects to the notification-service WebSocket.
- * – Shows a “waiting” placeholder until the message for this uploadId arrives.
- *
- * NOTE: If the user refreshes the page *after* the analysis has already
- * finished, no text will show (because there’s no polling fallback).
- */
 export default function ExtractionViewerPush({
-  uploadId
+  fileName
 }: {
-  uploadId: string
+  fileName: string
 }) {
-  const [text, setText] = useState<string | null>(null)
+  const router = useRouter()
+  const latest = useAnalysisSocket()
 
-  // Opens the socket and updates state once we receive { s3Key, result }
-  const latest = useAnalysisSocket(uploadId, setText)
+  useEffect(() => {
+    if (latest === EVENT_TYPES.COLLECTION_UPDATED) {
+      const timer = setTimeout(() => {
+        router.push('/collection')
+      }, 1000)
 
-  if (!text) {
-    return (
-      <p className="animate-pulse text-gray-500">
-        Waiting for analysis&hellip;
-      </p>
-    )
+      return () => clearTimeout(timer)
+    }
+  }, [latest, router])
+
+  // if (!latest) {
+  //   return (
+  //     <p className="animate-pulse text-gray-500">
+  //       Waiting for analysis&hellip;
+  //     </p>
+  //   )
+  // }
+
+  let text = ''
+  let progress = 0
+
+  switch (latest) {
+    case EVENT_TYPES.UPLOAD_RECEIVED:
+      text = 'Upload received'
+      progress = 2
+      break
+    case EVENT_TYPES.ANALYSIS_STARTED:
+      text = 'Analyzing'
+      progress = 3
+      break
+    case EVENT_TYPES.ANALYSIS_COMPLETED:
+      text = 'Analysis complete'
+      progress = 4
+      break
+    case EVENT_TYPES.ANALYSIS_READY:
+      text = 'Extraction processed'
+      progress = 5
+      break
+    case EVENT_TYPES.COLLECTION_UPDATED:
+      progress = 6
+      text = 'Collection updated. Redirecting'
+      break
+    default:
+      text = `Uploading ${fileName}`
+      progress = 1
   }
-
-  // const splitText = text.split(',')
 
   return (
     <div>
-      {text}
-      {/* {splitText.map((item) => (
-        <li key={item} className="text-white-500">
-          {item}
-        </li>
-      ))} */}
+      <progress value={progress} max={6} className="w-full" />
+      <p className="animate-pulse text-gray-500">{text}&hellip;</p>
     </div>
   )
 }
