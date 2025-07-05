@@ -19,7 +19,7 @@ export default function ExtractionViewerPush({
   const [text, setText] = useState<string | null>(null)
 
   // Opens the socket and updates state once we receive { s3Key, result }
-  useAnalysisSocket(uploadId, setText)
+  const latest = useAnalysisSocket(uploadId, setText)
 
   if (!text) {
     return (
@@ -29,15 +29,16 @@ export default function ExtractionViewerPush({
     )
   }
 
-  const splitText = text.split(',')
+  // const splitText = text.split(',')
 
   return (
-    <ul>
-      {splitText.map((item) => (
+    <div>
+      {text}
+      {/* {splitText.map((item) => (
         <li key={item} className="text-white-500">
           {item}
         </li>
-      ))}
-    </ul>
+      ))} */}
+    </div>
   )
 }
