@@ -19,7 +19,6 @@ export default async function ProtectedLayout({
   // 2️⃣ you can read `session.user` here for role-based gating, etc.
   return (
     <main className="flex h-screen flex-col">
-      {/* <main className="flex h-screen flex-col h-screen overflow-hidden"> */}
       <Suspense fallback={<div className="h-16" />}>
         <Navbar />
       </Suspense>

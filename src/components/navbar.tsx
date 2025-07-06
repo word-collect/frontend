@@ -15,7 +15,9 @@ import { usePathname } from 'next/navigation'
 
 const navigation = [
   { name: 'Collection', href: '/collection', current: true },
-  { name: 'Extract', href: '/extract', current: false }
+  { name: 'Extract', href: '/extract', current: false },
+  { name: 'Dictionary', href: '/dictionary', current: false },
+  { name: 'Thesaurus', href: '/thesaurus', current: false }
 ]
 
 function classNames(...classes: string[]) {
@@ -54,21 +56,26 @@ export default function Navbar() {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      pathname === item.href
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {navigation.map((item) => {
+                  const active =
+                    pathname === item.href ||
+                    pathname.startsWith(`${item.href}/`)
+
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        active
+                          ? 'bg-gray-900 text-white'
+                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'rounded-md px-3 py-2 text-sm font-medium'
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -113,22 +120,27 @@ export default function Navbar() {
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                pathname === item.href
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium'
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
+          {navigation.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`)
+
+            return (
+              <DisclosureButton
+                key={item.name}
+                as="a"
+                href={item.href}
+                aria-current={item.current ? 'page' : undefined}
+                className={classNames(
+                  active
+                    ? 'bg-gray-900 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'block rounded-md px-3 py-2 text-base font-medium'
+                )}
+              >
+                {item.name}
+              </DisclosureButton>
+            )
+          })}
         </div>
       </DisclosurePanel>
     </Disclosure>

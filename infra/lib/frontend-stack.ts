@@ -39,7 +39,14 @@ export class FrontendStack extends cdk.Stack {
       this,
       `/${appName}/${environment}/collection-service/api-endpoint`
     )
-
+    const dictionaryApiKey = ssm.StringParameter.valueFromLookup(
+      this,
+      `/${appName}/${environment}/frontend/dictionary-api-key`
+    )
+    const thesaurusApiKey = ssm.StringParameter.valueFromLookup(
+      this,
+      `/${appName}/${environment}/frontend/thesaurus-api-key`
+    )
     const authSecret = ssm.StringParameter.fromSecureStringParameterAttributes(
       this,
       'AuthSecretParam',
@@ -124,6 +131,8 @@ export class FrontendStack extends cdk.Stack {
           enableLogging: true,
           environment: {
             UPLOAD_SERVICE_URL: uploadApi,
+            DICTIONARY_API_KEY: dictionaryApiKey,
+            THESAURUS_API_KEY: thesaurusApiKey,
             NEXTAUTH_URL: `https://wordcollect.haydenturek.com`,
             AUTH_TRUST_HOST: 'true'
           },

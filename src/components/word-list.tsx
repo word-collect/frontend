@@ -3,160 +3,16 @@ import { createWord, deleteWord, listWords, updateWord } from '@/lib/collection'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
-const statuses: Record<string, string> = {
-  Complete: 'text-green-700 bg-green-50 ring-green-600/20',
-  'In progress': 'text-gray-600 bg-gray-50 ring-gray-500/10',
-  Archived: 'text-yellow-800 bg-yellow-50 ring-yellow-600/20'
-}
-const projects = [
-  {
-    id: 1,
-    name: 'GraphQL API',
-    href: '#',
-    status: 'Complete',
-    createdBy: 'Leslie Alexander',
-    dueDate: 'March 17, 2023',
-    dueDateTime: '2023-03-17T00:00Z'
-  },
-  {
-    id: 2,
-    name: 'New benefits plan',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Leslie Alexander',
-    dueDate: 'May 5, 2023',
-    dueDateTime: '2023-05-05T00:00Z'
-  },
-  {
-    id: 3,
-    name: 'Onboarding emails',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Courtney Henry',
-    dueDate: 'May 25, 2023',
-    dueDateTime: '2023-05-25T00:00Z'
-  },
-  {
-    id: 4,
-    name: 'iOS app',
-    href: '#',
-    status: 'In progress',
-    createdBy: 'Leonard Krasner',
-    dueDate: 'June 7, 2023',
-    dueDateTime: '2023-06-07T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  },
-  {
-    id: 5,
-    name: 'Marketing site redesign',
-    href: '#',
-    status: 'Archived',
-    createdBy: 'Courtney Henry',
-    dueDate: 'June 10, 2023',
-    dueDateTime: '2023-06-10T00:00Z'
-  }
-]
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
+import { ClipLoader } from 'react-spinners'
 
 export default function Example() {
   const [items, setItems] = useState<{ word: string; notes: string }[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const { status } = useSession()
   const [initialized, setInitialized] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     async function init() {
@@ -180,7 +36,26 @@ export default function Example() {
     setLoading(false)
   }
 
-  if (loading) return <div>Loading...</div>
+  function handleDefine(term: string) {
+    if (term) router.push(`/dictionary/${encodeURIComponent(term)}`)
+  }
+
+  function handleRelate(term: string) {
+    if (term) router.push(`/thesaurus/${encodeURIComponent(term)}`)
+  }
+
+  if (loading)
+    return (
+      <div className="pt-16 flex justify-center items-center">
+        <ClipLoader
+          color={'#22C55E'}
+          loading={loading}
+          size={32}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    )
 
   return (
     <div>
@@ -207,6 +82,18 @@ export default function Example() {
               </div>
             </div>
             <div className="flex flex-none items-center gap-x-4">
+              <span
+                className="cursor-pointer hidden rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:block"
+                onClick={() => handleDefine(item.word)}
+              >
+                Define
+              </span>
+              <span
+                className="cursor-pointer hidden rounded-md bg-gray-100 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:block"
+                onClick={() => handleRelate(item.word)}
+              >
+                Relate
+              </span>
               <Menu as="div" className="relative flex-none">
                 <MenuButton className="relative block text-gray-500 hover:text-gray-900">
                   <span className="absolute -inset-2.5" />
@@ -238,6 +125,22 @@ export default function Example() {
                       }}
                     >
                       Delete
+                    </span>
+                  </MenuItem>
+                  <MenuItem>
+                    <span
+                      className="cursor-pointer block sm:hidden px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
+                      onClick={() => handleDefine(item.word)}
+                    >
+                      Define
+                    </span>
+                  </MenuItem>
+                  <MenuItem>
+                    <span
+                      className="cursor-pointer block sm:hidden px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
+                      onClick={() => handleRelate(item.word)}
+                    >
+                      Relate
                     </span>
                   </MenuItem>
                 </MenuItems>
