@@ -1,19 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import PublicNav from '@/components/public-nav'
 
 const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'Features', href: '/features' },
   { name: 'Architecture', href: '/architecture' },
   { name: 'About', href: '/about' },
   { name: 'GitHub', href: 'https://github.com/word-collect' }
 ]
 
-export default function Example() {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   useEffect(() => {
     // fix weird overflow-hidden on body after login/logout
@@ -25,16 +27,16 @@ export default function Example() {
 
   return (
     <div className="bg-gray-900">
-      <header className="absolute inset-x-0 top-0 z-50">
+      {/* <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
           className="flex items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img alt="" src="/bedrock-color.svg" className="h-8 w-auto" />
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -76,11 +78,7 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
-                  alt=""
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
-                />
+                <img alt="" src="/bedrock-color.svg" className="h-8 w-auto" />
               </a>
               <button
                 type="button"
@@ -118,12 +116,19 @@ export default function Example() {
             </div>
           </DialogPanel>
         </Dialog>
-      </header>
+      </header> */}
 
-      <div className="relative isolate overflow-hidden pt-14">
+      <Suspense fallback={null}>
+        <PublicNav />
+      </Suspense>
+
+      <div className="relative isolate overflow-hidden pt-14 min-h-screen">
         <img
           alt=""
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+          src={
+            'https://images.unsplash.com/photo-1550399105-c4db5fb85c18?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' +
+            '&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply'
+          }
           className="absolute inset-0 -z-10 size-full object-cover"
         />
         <div
@@ -138,7 +143,7 @@ export default function Example() {
             className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-288.75"
           />
         </div>
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
@@ -179,7 +184,8 @@ export default function Example() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        {children}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"

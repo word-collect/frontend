@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/20/solid'
 // import SvgPanZoom from '@/components/svg-pan-zoom'
 import Diagram from '@/components/diagram'
-import Link from 'next/link'
 
 const features = [
   {
@@ -51,13 +50,8 @@ const features = [
 
 export default function Example() {
   return (
-    <div className="bg-gray-900 py-24 sm:py-32">
+    <div className="py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-4">
-          <Link href="/" className="text-lg/8 text-gray-300">
-            ← Home
-          </Link>
-        </div>
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-base/7 font-semibold text-indigo-400">
             Ready to scale
@@ -75,9 +69,6 @@ export default function Example() {
       <div className="relative overflow-hidden pt-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Diagram src="/architecture.svg" />
-          <div aria-hidden="true" className="relative">
-            <div className="absolute -inset-x-20 bottom-0 bg-linear-to-t from-gray-900 pt-[7%]" />
-          </div>
         </div>
       </div>
       <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
