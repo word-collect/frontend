@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function Page() {
   return (
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl py-32">
+      <div className="mx-auto max-w-2xl py-16 md:py-32">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
             Project code is public on GitHub.{' '}

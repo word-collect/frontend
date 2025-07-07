@@ -14,7 +14,7 @@ export default function ThesaurusSearchPage() {
   }
 
   return (
-    <section className="flex h-full flex-1 items-center justify-center">
+    <section className="flex flex-1 items-center justify-center">
       <div className="flex-1 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <form onSubmit={handleSubmit} className="mt-2 flex gap-2">
           <div className="flex flex-1 rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">

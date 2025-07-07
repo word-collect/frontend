@@ -28,7 +28,10 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-40 shrink-0">
+    <Disclosure
+      as="nav"
+      className="bg-gray-800 fixed inset-x-0 top-0 z-40 shrink-0"
+    >
       <div className="mx-auto max-w-4xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

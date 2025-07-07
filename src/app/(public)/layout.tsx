@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-900 flex min-h-[100dvh]">
       {/* <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -122,7 +122,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <PublicNav />
       </Suspense>
 
-      <div className="relative isolate overflow-hidden pt-14 min-h-screen">
+      <div className="relative isolate overflow-hidden pt-14 grow">
         <img
           alt=""
           src={

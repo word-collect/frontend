@@ -137,7 +137,7 @@ export default function DictionaryTermPage() {
   }
 
   return (
-    <section className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section className="flex-1 max-w-4xl px-4 sm:px-6 lg:px-8 pt-4">
       <form onSubmit={handleSubmit} className="mt-2 flex gap-2">
         <div className="flex flex-1 rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
           <input
