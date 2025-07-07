@@ -65,20 +65,20 @@ export default function Example() {
           ➕ Add
         </button>
       </div>
-      <ul role="list" className="divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-100 overflow-x-hidden">
         {items.map((item) => (
           <li
             key={item.word}
-            className="flex items-center justify-between gap-x-6 py-5"
+            className="py-5 flex items-center justify-between gap-x-4"
           >
             <div className="min-w-0">
               <div className="flex items-start gap-x-3">
-                <p className="text-sm/6 font-semibold text-white-900">
+                <p className="text-sm/6 font-semibold text-white-900 break-words">
                   {item.word}
                 </p>
               </div>
               <div className="mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500">
-                <p className="whitespace-nowrap">{item.notes || 'No notes'}</p>
+                <p className="break-words">{item.notes || 'No notes'}</p>
               </div>
             </div>
             <div className="flex flex-none items-center gap-x-4">
