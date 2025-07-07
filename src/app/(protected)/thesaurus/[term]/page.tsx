@@ -38,7 +38,7 @@ export default function ThesaurusTermPage() {
   }, []) // run only on first mount
 
   const [search, setSearch] = useState(term ? decodeURIComponent(term) : '')
-  const [thesaurus, setThesaurus] = useState<Thesaurus | null>(null)
+  const [thesaurus, setThesaurus] = useState<Thesaurus[]>([])
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [errorText, setErrorText] = useState('')
@@ -50,11 +50,11 @@ export default function ThesaurusTermPage() {
       setLoading(true)
       const resp = await fetch(`/api/thesaurus?q=${term}`)
       const raw: Thesaurus[] | string[] = await resp.json()
-      console.log('raw', raw)
+      // console.log('raw', raw)
       if (isEntryArray(raw) && raw.length) {
-        setThesaurus(raw[0])
+        setThesaurus(raw)
       } else {
-        setThesaurus(null)
+        setThesaurus([])
         setSuggestions(raw as string[])
         if (!raw.length) {
           setErrorText('No results found')
@@ -86,9 +86,9 @@ export default function ThesaurusTermPage() {
         />
       </div>
     )
-  } else if (thesaurus) {
-    let syns = [...new Set(thesaurus.meta.syns.flat())]
-    let ants = [...new Set(thesaurus.meta.ants.flat())]
+  } else if (thesaurus.length) {
+    let syns = [...new Set(thesaurus.flatMap((t) => t.meta.syns).flat())]
+    let ants = [...new Set(thesaurus.flatMap((t) => t.meta.ants).flat())]
     result = (
       <div className="mt-4 text-white list-decimal list-inside pb-4 pt-8">
         <div className="mb-8">
@@ -160,10 +160,12 @@ export default function ThesaurusTermPage() {
             type="text"
             placeholder="Search"
             className="block min-w-0 grow px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+            autoCapitalize="none"
+            suppressHydrationWarning
             value={search}
             onChange={(e) => {
-              if (thesaurus) {
-                setThesaurus(null)
+              if (thesaurus.length) {
+                setThesaurus([])
               }
               if (suggestions.length) {
                 setSuggestions([])

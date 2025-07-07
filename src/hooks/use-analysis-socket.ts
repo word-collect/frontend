@@ -53,7 +53,7 @@ export function useAnalysisSocket() {
 
     ws.onclose = (evt) => {
       socketRef.current = null
-      console.log('socket closed', evt.code, evt.reason)
+      // console.log('socket closed', evt.code, evt.reason)
     }
 
     return () => {

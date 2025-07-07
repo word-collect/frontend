@@ -24,6 +24,8 @@ export default function ThesaurusSearchPage() {
               type="text"
               placeholder="Search"
               className="block min-w-0 grow px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+              autoCapitalize="none"
+              suppressHydrationWarning
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />

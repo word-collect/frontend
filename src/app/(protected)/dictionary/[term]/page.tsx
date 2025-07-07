@@ -52,7 +52,7 @@ export default function DictionaryTermPage() {
       setLoading(true)
       const resp = await fetch(`/api/dictionary?q=${term}`)
       const raw: Definition[] | string[] = await resp.json()
-      console.log('RAWDICT', raw)
+      // console.log('RAWDICT', raw)
       if (isEntryArray(raw) && raw.length) {
         setDefinitions(raw.filter((d) => d.shortdef.length))
       } else {
@@ -146,6 +146,8 @@ export default function DictionaryTermPage() {
             type="text"
             placeholder="Search"
             className="block min-w-0 grow px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+            autoCapitalize="none"
+            suppressHydrationWarning
             value={search}
             onChange={(e) => {
               if (definitions.length) {

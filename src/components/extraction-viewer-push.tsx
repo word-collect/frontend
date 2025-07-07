@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useAnalysisSocket } from '@/hooks/use-analysis-socket'
-import { EVENT_TYPES, TEXT_GREEN_500 } from '@/constants'
+import { EVENT_TYPES } from '@/constants'
 import { useRouter } from 'next/navigation'
 
 export default function ExtractionViewerPush({
@@ -22,14 +22,6 @@ export default function ExtractionViewerPush({
       return () => clearTimeout(timer)
     }
   }, [latest, router])
-
-  // if (!latest) {
-  //   return (
-  //     <p className="animate-pulse text-gray-500">
-  //       Waiting for analysis&hellip;
-  //     </p>
-  //   )
-  // }
 
   let text = ''
   let progress = 0
@@ -62,12 +54,7 @@ export default function ExtractionViewerPush({
 
   return (
     <div>
-      <progress
-        color={TEXT_GREEN_500}
-        value={progress}
-        max={6}
-        className="w-full"
-      />
+      <progress value={progress} max={6} className="w-full" />
       <p className="animate-pulse text-gray-500">{text}&hellip;</p>
     </div>
   )

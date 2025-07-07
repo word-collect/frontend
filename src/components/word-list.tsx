@@ -28,7 +28,7 @@ export default function Example() {
   }, [status, initialized])
 
   async function add() {
-    const word = prompt('new word')?.trim()
+    const word = prompt('new word')?.trim().toLowerCase()
     if (!word) return
     setLoading(true)
     await createWord(word) // ➊ create
@@ -109,7 +109,7 @@ export default function Example() {
                       className="cursor-pointer block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
                       onClick={async () => {
                         const n = prompt('edit notes', item.notes) ?? item.notes
-                        await updateWord(item.word, n) // ➋ update
+                        await updateWord(item.word, n.toLowerCase()) // ➋ update
                         setItems(await listWords())
                       }}
                     >
