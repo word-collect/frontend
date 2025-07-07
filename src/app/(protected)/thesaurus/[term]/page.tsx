@@ -25,6 +25,18 @@ function isEntryArray(data: unknown): data is Thesaurus[] {
 export default function ThesaurusTermPage() {
   const { term } = useParams<{ term: string }>()
   const router = useRouter()
+
+  /* ------------------------------------------------------------------
+   * iOS Safari preserves the scroll position that was set while the
+   * keyboard was visible on the search page.  As soon as we reach the
+   * term-results page we reset the scroll so the search bar is visible.
+   * ------------------------------------------------------------------*/
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }, []) // run only on first mount
+
   const [search, setSearch] = useState(term ? decodeURIComponent(term) : '')
   const [thesaurus, setThesaurus] = useState<Thesaurus | null>(null)
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -78,7 +90,7 @@ export default function ThesaurusTermPage() {
     let syns = [...new Set(thesaurus.meta.syns.flat())]
     let ants = [...new Set(thesaurus.meta.ants.flat())]
     result = (
-      <div className="mt-4 text-white list-decimal list-inside pb-32 pt-8">
+      <div className="mt-4 text-white list-decimal list-inside pb-4 pt-8">
         <div className="mb-8">
           <h2 className="font-bold">Synonyms</h2>
           <div className="flex flex-wrap">

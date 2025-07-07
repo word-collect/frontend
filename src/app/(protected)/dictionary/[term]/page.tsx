@@ -26,6 +26,18 @@ function isEntryArray(data: unknown): data is Definition[] {
 export default function DictionaryTermPage() {
   const { term } = useParams<{ term: string }>()
   const router = useRouter()
+
+  /* ------------------------------------------------------------------
+   * iOS Safari preserves the scroll position that was set while the
+   * keyboard was visible on the search page.  As soon as we reach the
+   * term-results page we reset the scroll so the search bar is visible.
+   * ------------------------------------------------------------------*/
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }, []) // run only on first mount
+
   const [search, setSearch] = useState(term ? decodeURIComponent(term) : '')
   const [definitions, setDefinitions] = useState<Definition[]>([])
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -105,7 +117,7 @@ export default function DictionaryTermPage() {
     )
   } else if (definitions.length) {
     result = (
-      <ol className="mt-4 text-white list-decimal list-inside pb-32 pt-8">
+      <ol className="mt-4 text-white list-decimal list-inside pb-4 pt-8">
         {definitions.map((def) => (
           <li key={def.meta.id}>
             <span className="font-bold">{def.fl}</span>
