@@ -9,40 +9,40 @@ import {
 
 const features = [
   {
-    name: 'Push to deploy.',
+    name: 'Event-driven.',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-    icon: CloudArrowUpIcon
-  },
-  {
-    name: 'SSL certificates.',
-    description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+      'Leverages AWS EventBridge to trigger actions based on events and broadcasts updates to the browser.',
     icon: LockClosedIcon
   },
   {
-    name: 'Simple queues.',
+    name: 'Serverless.',
     description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus voluptas blanditiis et.',
+      'On-demand compute with zero servers to manage +  AWS Step Functions for declarative orchestration.',
     icon: ArrowPathIcon
   },
   {
-    name: 'Advanced security.',
+    name: 'AI-powered.',
     description:
-      'Iure sed ab. Aperiam optio placeat dolor facere. Officiis pariatur eveniet atque et dolor.',
+      'AWS Bedrock handles term-extraction from a diverse range of sources with varying levels of structure.',
     icon: FingerPrintIcon
   },
   {
-    name: 'Powerful API.',
+    name: 'Microservice-architecture.',
     description:
-      'Laudantium tempora sint ut consectetur ratione. Ut illum ut rem numquam fuga delectus.',
+      'Seven Github repositories allow for independent development and deployment.',
     icon: Cog6ToothIcon
   },
   {
-    name: 'Database backups.',
+    name: 'Infrastructure as code.',
     description:
-      'Culpa dolorem voluptatem velit autem rerum qui et corrupti. Quibusdam quo placeat.',
+      'Built with AWS CDK, with each repo managing its own stacks and a separate repo for shared resources.',
     icon: ServerIcon
+  },
+  {
+    name: 'Continuous deployment.',
+    description:
+      'Uses GitHub Actions to automatically deploy new versions of the app on pushes to main.',
+    icon: CloudArrowUpIcon
   }
 ]
 

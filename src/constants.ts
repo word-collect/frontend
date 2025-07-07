@@ -5,3 +5,5 @@ export const EVENT_TYPES = {
   ANALYSIS_READY: 'AnalysisReady',
   COLLECTION_UPDATED: 'CollectionUpdated'
 }
+
+export const TEXT_GREEN_500 = '#22C55E'

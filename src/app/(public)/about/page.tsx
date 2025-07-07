@@ -7,14 +7,145 @@ export default function Example() {
             About
           </h2>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat.
+            There are a lot of vocabulary apps out there, and they all stink.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat.
+            This is the common pattern: you decide you want to improve your
+            vocabulary for one reason or another. Maybe it's because you wish to
+            strengthen your communication skills in order to appear more
+            intelligent in coversations. Or maybe you fancy yourself a writer,
+            and you want to impress people with your hard-hitting and
+            emotionally-charged prose.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            So you download an app, thinking it's going to turn you into the
+            next Cormac McCarthy, but what happens? What do these apps
+            invariably do?
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            They serve you up a bunch of ten-dollar words that nobody knows!
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Vocabulary apps are all built around this same, flawed premise, but
+            to be honest it's really not their fault. When you download one of
+            these applications, you're basically telling the developers that you
+            want to expand your lexicon, so they help you do this by trying to
+            teach you words you aren't likely to have known already.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            So the problem really isn't with the app. No my friend—the problem
+            is with you.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Take a step back for a moment. What is a strong vocabulary? What is
+            it about certain writers, certain speakers, certain people that
+            imbues their language with such power and precision?
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Is it because the words they choose to use are long and complicated,
+            and hardly understood by the average person? I promise you that it's
+            not. I promise you that if you take every word you learn from a
+            vocabulary app and try to shoehorn it into a piece of prose, what
+            you will have written will be pure, unmitigated drivel. Try to use
+            those terms in a conversation? People are gonna look at you like you
+            have six heads.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            So what then? What is it that makes a person eloquent, if not
+            syllable count or character length?
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            It all comes down to one simple word: clarity.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            When you're reading a book by one of the greats, and you get smacked
+            across the face with the most beautiful, evocative and potent word
+            you've ever seen, you don't think, 'wow, that's a long word'. You
+            think, 'wow, that's a powerful word'. And you think that because
+            whatever abstract thing the author was trying to convey, they
+            conveyed it perfectly.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Part of that power comes from the fact that they used the word in a
+            way you yourself would have never thought to use it, in a place you
+            yourself would have never expected it used. But you knew the word!
+            You probably knew it since the first grade; you just wouldn't have
+            reached for it to describe the thing the author was talking about.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            A vocabulary app can't teach you words like that. It can't help you
+            remember words like that. There's only one way to learn simple words
+            that pack a punch: you gotta read!
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Ok, so you read, and when you come across a word or phrase that
+            moves you, you highlight it. But now you have a new problem: your
+            collection of words is split across hundreds of different source
+            texts. You're not going to get better at using those words, at
+            reaching for those words when the situation demands it unless you
+            have a centralized repository of them all.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            That's where WordCollect comes in. At it's core, it's a simple app
+            that does a simple thing: it lets you store your favorite words and
+            phrases. But it's so much more than that. Let me explain.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            The main pain point that inspired me to build this app was the fact
+            that I do all my reading with the Kindle app. I have thousands of
+            highlights split across hundreds of different books. Some of these
+            highlights are words, but some of them are more like phrases or
+            idioms, or words that commonly appear together, and some of them are
+            entire passages that for whatever reason I didn't want to forget.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            I always wanted a way to build a reference library of them all, but
+            it's actually more difficult of a problem than it seems on the
+            surface.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            First, when you export your Kindle annotations from the Kindle app,
+            you get a messy HTML file that includes a bunch of markup around the
+            words. That markup includes English words itself, which presumably
+            you don't care about. It would be relatively trivial to write a
+            computer program to strip the markup and store just the values of
+            your highlights, but even if you were to do that, you'd have another
+            issue on your hands.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Remember earlier when I told you that I tend to highlight not just
+            words and phrases but also entire passages? Well, when I see an
+            author use a word or phrase in a novel way, I want to steal it. I
+            want to remember it and find a way to use it in my daily endeavors.
+            But I don't want to steal an entire passage from another writer.
+            That's plagiarism. And that's why WordCollect uses AI to help you
+            extract just the words and phrases from your Kindle annotations,
+            even though you could have highlighted anything!
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            And that's not all. Thanks to the power of AI, you can upload any
+            text document to WordCollect, and WordCollect will do it's best to
+            pull out words and phrases worth learning. Everytime you do, it
+            automatically adds them to your collection so you can reference them
+            later.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            You can also add words and phrases individually—edit them, delete
+            them, even store a pet note or definition so you can tell your
+            future self why you found that word so important.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            In the end, WordCollect is a tool to build a better self. You are
+            what you think. If you can improve your ability to express abstract
+            things, then new plateaus await.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            I built this project for a specific job prospect that requires
+            knowledge of serverless microservices and AI integration. I hope you
+            find it useful.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            Thanks!
           </p>
         </div>
       </div>
