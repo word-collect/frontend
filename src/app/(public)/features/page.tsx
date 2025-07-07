@@ -1,10 +1,10 @@
 import {
-  ArrowPathIcon,
-  CloudArrowUpIcon,
-  Cog6ToothIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-  ServerIcon
+  CloudArrowDownIcon,
+  AcademicCapIcon,
+  BookOpenIcon,
+  GlobeAmericasIcon,
+  BuildingLibraryIcon,
+  ViewColumnsIcon
 } from '@heroicons/react/20/solid'
 
 const features = [
@@ -12,37 +12,37 @@ const features = [
     name: 'One collection.',
     description:
       'No more juggling multiple sources. With WordCollect, all your favorite words are stored in one place.',
-    icon: LockClosedIcon
+    icon: BuildingLibraryIcon
   },
   {
     name: 'Phrase support.',
     description:
       'Save phrases, idioms, and other expressions that you want to remember, and see their definitions.',
-    icon: CloudArrowUpIcon
+    icon: ViewColumnsIcon
   },
   {
     name: 'AI-enabled.',
     description:
       'Automatically extract words and phrases from any text document, including PDFs, HTML files, and more.',
-    icon: ArrowPathIcon
+    icon: AcademicCapIcon
   },
   {
     name: 'Use anywhere.',
     description:
       'Cloud-based, so you can access your collection from any device with an internet connection.',
-    icon: FingerPrintIcon
+    icon: CloudArrowDownIcon
   },
   {
     name: 'Define terms.',
     description:
       'Built-in dictionary lets you look up terms from your collection and save new ones with an easy-to-use interface.',
-    icon: Cog6ToothIcon
+    icon: BookOpenIcon
   },
   {
     name: 'Discover new words.',
     description:
       'Thesaurus integration with support for synonyms, antonyms, and related words.',
-    icon: ServerIcon
+    icon: GlobeAmericasIcon
   }
 ]
 

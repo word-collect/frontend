@@ -1,12 +1,11 @@
 import {
-  ArrowPathIcon,
   CloudArrowUpIcon,
-  Cog6ToothIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-  ServerIcon
+  EnvelopeIcon,
+  ServerStackIcon,
+  BoltIcon,
+  CubeTransparentIcon,
+  NoSymbolIcon
 } from '@heroicons/react/20/solid'
-// import SvgPanZoom from '@/components/svg-pan-zoom'
 import Diagram from '@/components/diagram'
 
 const features = [
@@ -14,31 +13,31 @@ const features = [
     name: 'Event-driven.',
     description:
       'Leverages AWS EventBridge to trigger actions based on events and broadcasts updates to the browser.',
-    icon: LockClosedIcon
+    icon: EnvelopeIcon
   },
   {
     name: 'Serverless.',
     description:
       'On-demand compute with zero servers to manage +  AWS Step Functions for declarative orchestration.',
-    icon: ArrowPathIcon
+    icon: NoSymbolIcon
   },
   {
     name: 'AI-powered.',
     description:
       'AWS Bedrock handles term-extraction from a diverse range of sources with varying levels of structure.',
-    icon: FingerPrintIcon
+    icon: BoltIcon
   },
   {
     name: 'Microservice-architecture.',
     description:
       'Seven Github repositories allow for independent development and deployment.',
-    icon: Cog6ToothIcon
+    icon: CubeTransparentIcon
   },
   {
     name: 'Infrastructure as code.',
     description:
       'Built with AWS CDK, with each repo managing its own stacks and a separate repo for shared resources.',
-    icon: ServerIcon
+    icon: ServerStackIcon
   },
   {
     name: 'Continuous deployment.',
