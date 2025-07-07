@@ -61,8 +61,8 @@ export default function Example() {
           </p>
           <p className="mt-6 text-lg/8 text-gray-300">
             Developed with modern architecural practices and tools to deliver a
-            minimal yet robust and cost-efficient solution that is easy to
-            maintain and expand.
+            minimal yet robust solution that is primed for maintenance and
+            expansion.
           </p>
         </div>
       </div>
