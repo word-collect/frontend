@@ -10,7 +10,7 @@ export default function Example() {
             There are a lot of vocabulary apps out there, and they all stink.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            This is the common pattern: you decide you want to improve your
+            This is the typical pattern: you decide you want to improve your
             vocabulary for one reason or another. Maybe it's because you wish to
             strengthen your communication skills in order to appear more
             intelligent in coversations. Or maybe you fancy yourself a writer,
@@ -67,27 +67,28 @@ export default function Example() {
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Part of that power comes from the fact that they used the word in a
-            way you yourself would have never thought to use it, in a place you
-            yourself would have never expected it used. But you knew the word!
-            You probably knew it since the first grade; you just wouldn't have
-            reached for it to describe the thing the author was talking about.
+            way you yourself would have never thought to use it, in a place
+            where you yourself would have never expected it to be used. But you
+            knew the word! You probably knew it since the first grade; you just
+            wouldn't have reached for it to describe the thing the author was
+            talking about.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             A vocabulary app can't teach you words like that. It can't help you
-            remember words like that. There's only one way to learn simple words
+            remember words like that. There's only one way to learn common words
             that pack a punch: you gotta read!
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Ok, so you read, and when you come across a word or phrase that
             moves you, you highlight it. But now you have a new problem: your
             collection of words is split across hundreds of different source
-            texts. You're not going to get better at using those words, at
-            reaching for those words when the situation demands it unless you
-            have a centralized repository of them all.
+            texts. You're not going to get better at using those words—at
+            reaching for those words when the situation demands it—unless you
+            have a centralized repository of them.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            That's where WordCollect comes in. At it's core, it's a simple app
-            that does a simple thing: it lets you store your favorite words and
+            That's where WordCollect comes in. At it's core, it's a basic app
+            that does a basic thing: it lets you store your favorite words and
             phrases. But it's so much more than that. Let me explain.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
@@ -95,7 +96,7 @@ export default function Example() {
             that I do all my reading with the Kindle app. I have thousands of
             highlights split across hundreds of different books. Some of these
             highlights are words, but some of them are more like phrases or
-            idioms, or words that commonly appear together, and some of them are
+            idioms, or words that tend to appear together, and some of them are
             entire passages that for whatever reason I didn't want to forget.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
