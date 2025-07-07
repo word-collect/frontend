@@ -7,6 +7,9 @@ interface Props {
   height?: string | number // optional height for the viewport
 }
 
+// Treat anything narrower than this as “mobile”.
+const MOBILE_BREAKPOINT = 768 // px
+
 export default function Diagram({ src, height = '80vh' }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const [svgContent, setSvgContent] = useState<string | null>(null)
@@ -33,8 +36,22 @@ export default function Diagram({ src, height = '80vh' }: Props) {
         zoomEnabled: true,
         controlIconsEnabled: true,
         fit: true,
-        center: true
+        center: true,
+        minZoom: 0.5,
+        maxZoom: 8
       })
+
+      // 🎯  On mobile, zoom in so the diagram fills the tall viewport.
+      if (window.innerWidth < MOBILE_BREAKPOINT) {
+        const containerHeight = container.current!.clientHeight
+        const { height: svgHeight } = svgEl.getBBox()
+        const targetScale = containerHeight / svgHeight
+
+        if (targetScale > 1) {
+          instance.zoom(2) // scale up
+          instance.center() // keep it centred
+        }
+      }
     })
 
     // clean up on unmount
