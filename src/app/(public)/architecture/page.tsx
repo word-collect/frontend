@@ -59,9 +59,8 @@ export default function Example() {
             Event-driven. Severless.
           </p>
           <p className="mt-6 text-lg/8 text-gray-300">
-            Developed with modern architecural practices and tools to deliver a
-            minimal yet robust solution that is primed for maintenance and
-            expansion.
+            Developed with modern architectural practices and tools to deliver a
+            minimal yet robust solution that is primed for future expansion.
           </p>
         </div>
       </div>
