@@ -9,40 +9,40 @@ import {
 
 const features = [
   {
-    name: 'Event-driven.',
+    name: 'One collection.',
     description:
-      'Leverages AWS EventBridge to trigger actions based on events and broadcasts updates to the browser.',
+      'No more juggling multiple sources. With WordCollect, all your favorite words are stored in one place.',
     icon: LockClosedIcon
   },
   {
-    name: 'Serverless.',
+    name: 'Phrase support.',
     description:
-      'On-demand compute with zero servers to manage +  AWS Step Functions for declarative orchestration.',
+      'Save phrases, idioms, and other expressions that you want to remember, and see their definitions.',
+    icon: CloudArrowUpIcon
+  },
+  {
+    name: 'AI-enabled.',
+    description:
+      'Automatically extract words and phrases from any text document, including PDFs, Word documents, and more.',
     icon: ArrowPathIcon
   },
   {
-    name: 'AI-powered.',
+    name: 'Use anywhere.',
     description:
-      'AWS Bedrock handles term-extraction from a diverse range of sources with varying levels of structure.',
+      'Cloud-based, so you can access your collection from any device with an internet connection.',
     icon: FingerPrintIcon
   },
   {
-    name: 'Microservice-architecture.',
+    name: 'Define terms.',
     description:
-      'Seven Github repositories allow for independent development and deployment.',
+      'Built-in dictionary lets you look up terms from your collection and save new ones with an easy-to-use interface.',
     icon: Cog6ToothIcon
   },
   {
-    name: 'Infrastructure as code.',
+    name: 'Discover new words.',
     description:
-      'Built with AWS CDK, with each repo managing its own stacks and a separate repo for shared resources.',
+      'Thesaurus integration with support for synonyms, antonyms, and related words.',
     icon: ServerIcon
-  },
-  {
-    name: 'Continuous deployment.',
-    description:
-      'Uses GitHub Actions to automatically deploy new versions of the app on pushes to main.',
-    icon: CloudArrowUpIcon
   }
 ]
 
@@ -52,15 +52,15 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-base/7 font-semibold text-indigo-400">
-            Everything you need
+            No more ten-dollar words
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-            No server? No problem.
+            A better vocabulary app
           </p>
           <p className="mt-6 text-lg/8 text-gray-300">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate
-            blanditiis.
+            WordCollect doesn't tell you what to learn. It supports your
+            learning by giving you a place to store your favorite words and
+            phrases, and tools to help you store them.
           </p>
         </div>
         <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 text-gray-400 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-16">

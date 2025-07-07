@@ -54,10 +54,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-base/7 font-semibold text-indigo-400">
-            Ready to scale
+            Ready to grow
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl sm:text-balance">
-            Event-driven. Split-repo.
+            Event-driven. Severless.
           </p>
           <p className="mt-6 text-lg/8 text-gray-300">
             Developed with modern architecural practices and tools to deliver a

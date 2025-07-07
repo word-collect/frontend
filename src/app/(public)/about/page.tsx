@@ -1,7 +1,7 @@
 export default function Example() {
   return (
-    <div className="py-24 sm:py-32 grow">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="py-24 sm:py-32 grow flex justify-center">
+      <div className="max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">
             About
@@ -140,9 +140,9 @@ export default function Example() {
             things, then new plateaus await.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            I built this project for a specific job prospect that requires
-            knowledge of serverless microservices and AI integration. I hope you
-            find it useful.
+            I built this app for a specific job prospect that requires knowledge
+            of serverless microservices and AI integration. I hope you find it
+            useful.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Thanks!
