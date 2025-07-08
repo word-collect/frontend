@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import { useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { EVENT_TYPES } from '@/constants'
+import { ServerEvent } from '@/types/types'
 
 /* --- helper to fetch once via SWR --- */
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -16,7 +17,7 @@ export function useAnalysisSocket() {
   const idToken = session?.id_token // undefined until sign-in
 
   const socketRef = useRef<WebSocket>(null) // check initial value
-  const [latest, setLatest] = useState<string | null>(null)
+  const [latest, setLatest] = useState<ServerEvent | null>(null)
 
   // (1) open the WebSocket when we have both wsUrl + uploadId
   useEffect(() => {
@@ -36,12 +37,12 @@ export function useAnalysisSocket() {
     const ws = new WebSocket(url)
     socketRef.current = ws
 
-    ws.onmessage = (evt) => {
+    ws.onmessage = (evt: MessageEvent) => {
       try {
-        const msg = JSON.parse(evt.data) // { s3Key, result }
+        const msg = JSON.parse(evt.data) as ServerEvent // { s3Key, result }
         const eventType = msg.eventType
 
-        setLatest(eventType)
+        setLatest(msg)
 
         if (eventType === EVENT_TYPES.COLLECTION_UPDATED) {
           ws.close(1000, 'done')
