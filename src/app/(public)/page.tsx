@@ -21,7 +21,7 @@ export default function Page() {
             Improve your vocab with AI
           </h1>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            wordcollect helps you extract vocabulary words and phrases from
+            WordCollect helps you extract vocabulary words and phrases from
             files and stores them automatically so you can commit them to
             memory.
           </p>
