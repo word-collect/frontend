@@ -55,10 +55,10 @@ export default function Example() {
             syllable count or character length?
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            It all comes down to one simple word: clarity.
+            It all comes down to one simple thing: <strong>clarity</strong>.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            When you're reading a book by one of the greats, and you get smacked
+            When you're reading a book by one of the greats and you get smacked
             across the face with the most beautiful, evocative and compelling
             word you've ever seen, you don't think, 'wow, that's a long word'.
             You think, 'wow, that's a powerful word'. And you think that because
@@ -124,15 +124,37 @@ export default function Example() {
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             And that's not all. Thanks to the power of AI, you can upload any
-            text document to WordCollect, and WordCollect will do it's best to
-            pull out words and phrases worth learning. Everytime you do, it
-            automatically adds them to your collection so you can reference them
-            later.
+            text document to WordCollect, and WordCollect will pull out words
+            and phrases worth learning. Everytime you do, it automatically adds
+            them to your collection so you can reference them later.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            You can also add words and phrases individually—edit them, delete
-            them, even store a pet note or definition so you can tell your
-            future self why you found that word so important.
+            But wait; there's more (and this might be the best part). Look, I
+            know I made a big deal about how your average vocabulary app leaves
+            a lot to be desired, but the truth is that there are thousands of
+            useful vocabulary lists hosted on the web. Just paste the URL to any
+            vocabulary or idiom list into WordCollect and the AI will
+            automatically extract the listed terms and store them in your
+            collection.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            And why stop there? What if you really do want to learn some
+            ten-dollar words? What if you wanted to take an article or blog post
+            and just pull out the words you didn't know? You can do that too! It
+            works for any URL or text document, thanks to the classification
+            phase.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            WordCollect will classify your URLs or uploads into one of three
+            distinct categories: Kindle highlights, vocabulary lists, or general
+            prose. If it detects prose, it'll just extract the words and phrases
+            you'd be likely to find in a traditional vocabulary app.
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            That's it! Of course you can also add words or phrases
+            individually—edit them, delete them, even store a note or a pet
+            definition so you can tell your future self why you found that word
+            so important.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             In the end, WordCollect is a tool to build a better self. You are
