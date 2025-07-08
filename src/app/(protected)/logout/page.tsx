@@ -27,7 +27,7 @@ export default function RedirectToLogin() {
   }, [])
 
   return (
-    <section className="mx-auto max-w-4xl px-2 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-4xl px-2 sm:px-6 lg:px-8 pt-16">
       <p>Logging out...</p>
     </section>
   )

@@ -4,27 +4,52 @@ import { useUploader } from '@/hooks/use-uploader'
 import { useState, useCallback } from 'react'
 import ExtractionViewerPush from './extraction-viewer-push'
 import { DocumentTextIcon } from '@heroicons/react/20/solid'
+import { useUrlUpload } from '@/hooks/use-url-upload'
 
 export const Uploader = () => {
-  const [uploadId, setUploadId] = useState<string | null>(null)
   const [fileName, setFileName] = useState<string | null>(null)
+  const [url, setUrl] = useState<string>('')
   const { upload } = useUploader()
+  const { upload: uploadUrl } = useUrlUpload()
 
   // upload helper reused by click-select *and* drag-drop
   const handleFile = useCallback(
     async (file: File | undefined) => {
+      console.log('running handleFile')
       if (!file) return
       setFileName(file.name)
       try {
-        const id = await upload(file) // returns the S3 key
-        setUploadId(id)
+        await upload(file) // returns the S3 key
       } catch (err) {
         console.error(err)
+        setFileName(null)
         alert('Upload failed')
       }
     },
     [upload]
   )
+
+  const handleUrlUpload = useCallback(
+    async (url: string) => {
+      console.log('running url upload')
+      setFileName(url)
+      try {
+        await uploadUrl(url) // returns the S3 key
+      } catch (err) {
+        console.error(err)
+        setFileName(null)
+        alert('Upload failed')
+      }
+    },
+    [uploadUrl]
+  )
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!url) return
+    if (fileName) return
+    await handleUrlUpload(url.trim())
+  }
 
   return (
     <>
@@ -35,6 +60,7 @@ export const Uploader = () => {
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault()
+            if (fileName) return
             void handleFile(e.dataTransfer.files?.[0])
           }}
         >
@@ -54,6 +80,7 @@ export const Uploader = () => {
                   name="file-upload"
                   type="file"
                   className="sr-only"
+                  disabled={!!fileName}
                   onChange={(e) => handleFile(e.target.files?.[0])}
                 />
               </label>
@@ -65,6 +92,37 @@ export const Uploader = () => {
           </div>
         </div>
       </div>
+      <div className="relative my-12">
+        <div aria-hidden="true" className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-500" />
+        </div>
+        <div className="relative flex justify-center">
+          <span className="bg-black px-2 text-sm text-gray-500">Or</span>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit} className="mt-2 flex gap-2">
+        <div className="flex flex-1 rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <input
+            id="search"
+            name="search"
+            type="text"
+            placeholder="Provide a URL"
+            className="block min-w-0 grow px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+            autoCapitalize="none"
+            suppressHydrationWarning
+            value={url}
+            disabled={!!fileName}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={!!fileName}
+          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Submit
+        </button>
+      </form>
       {/* {fileName && <p className="text-sm text-gray-500">{fileName}</p>} */}
       {/* ── Real-time viewer ────────────────────────────────────────── */}
       {fileName && (
