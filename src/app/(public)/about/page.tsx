@@ -87,7 +87,7 @@ export default function Example() {
             have a centralized repository of them.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            That's where WordCollect comes in. At it's core, it's a basic app
+            That's where WordCollect comes in. At its core, it's a basic app
             that does a basic thing: it lets you store your favorite words and
             phrases. But it's so much more than that. Let me explain.
           </p>
