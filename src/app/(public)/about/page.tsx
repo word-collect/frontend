@@ -11,10 +11,10 @@ export default function Example() {
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             This is the typical pattern: you decide you want to improve your
-            vocabulary for one reason or another. Maybe it's because you wish to
+            vocabulary for one reason or another. Maybe it's so that you can
             strengthen your communication skills in order to appear more
             intelligent in coversations. Or maybe you fancy yourself a writer,
-            and you want to impress people with your hard-hitting and
+            and you want to inspire readers with your hard-hitting and
             emotionally-charged prose.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
@@ -28,9 +28,9 @@ export default function Example() {
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Vocabulary apps are all built around this same, flawed premise, but
             to be honest it's really not their fault. When you download one of
-            these applications, you're basically telling the developers that you
-            want to expand your lexicon, so they help you do this by trying to
-            teach you words you aren't likely to have known already.
+            these apps, you're basically telling the developers that you want to
+            expand your lexicon, so they help you do this by trying to teach you
+            new words you aren't likely to have known already.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             So the problem really isn't with the app. No my friend—the problem
@@ -39,7 +39,7 @@ export default function Example() {
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Take a step back for a moment. What is a strong vocabulary? What is
             it about certain writers, certain speakers, certain people that
-            imbues their language with such power and precision?
+            imbues their language with magic and potency?
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Is it because the words they choose to use are long and complicated,
@@ -59,9 +59,9 @@ export default function Example() {
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             When you're reading a book by one of the greats, and you get smacked
-            across the face with the most beautiful, evocative and potent word
-            you've ever seen, you don't think, 'wow, that's a long word'. You
-            think, 'wow, that's a powerful word'. And you think that because
+            across the face with the most beautiful, evocative and compelling
+            word you've ever seen, you don't think, 'wow, that's a long word'.
+            You think, 'wow, that's a powerful word'. And you think that because
             whatever abstract thing the author was trying to convey, they
             conveyed it perfectly.
           </p>
@@ -81,7 +81,7 @@ export default function Example() {
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Ok, so you read, and when you come across a word or phrase that
             moves you, you highlight it. But now you have a new problem: your
-            collection of words is split across hundreds of different source
+            collection of words is spread across a fleet of different source
             texts. You're not going to get better at using those words—at
             reaching for those words when the situation demands it—unless you
             have a centralized repository of them.
@@ -101,17 +101,16 @@ export default function Example() {
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             I always wanted a way to build a reference library of them all, but
-            it's actually more difficult of a problem than it seems on the
+            that's actually more difficult of a problem than it seems on the
             surface.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             First, when you export your Kindle annotations from the Kindle app,
-            you get a messy HTML file that includes a bunch of markup around the
-            words. That markup includes English words itself, which presumably
-            you don't care about. It would be relatively trivial to write a
-            computer program to strip the markup and store just the values of
-            your highlights, but even if you were to do that, you'd have another
-            issue on your hands.
+            you get a messy HTML file that includes a bunch of markup around
+            your highlighted text. While it would be more or less trivial to
+            write a computer program to strip that markup away and store just
+            the values of your highlights, even if you were to do that, you'd
+            have another issue on your hands.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             Remember earlier when I told you that I tend to highlight not just
