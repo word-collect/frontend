@@ -23,7 +23,7 @@ const features = [
   {
     name: 'AI-enabled.',
     description:
-      'Automatically extract words and phrases from any text document, including PDFs, HTML files, and more.',
+      'Automatically extract words and phrases from any URL or text document, including PDFs, HTML files, and more.',
     icon: AcademicCapIcon
   },
   {
