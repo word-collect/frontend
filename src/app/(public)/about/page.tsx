@@ -7,7 +7,8 @@ export default function Example() {
             About
           </h2>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            There are a lot of vocabulary apps out there, and they all stink.
+            There are a lot of vocabulary apps out there, but they all make the
+            same mistake.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             This is the typical pattern: you decide you want to improve your
@@ -30,7 +31,7 @@ export default function Example() {
             to be honest it's really not their fault. When you download one of
             these apps, you're basically telling the developers that you want to
             expand your lexicon, so they help you do this by trying to teach you
-            new words you aren't likely to have known already.
+            new words you aren't likely to have heard before.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             So the problem really isn't with the app. No my friend—the problem
@@ -58,7 +59,7 @@ export default function Example() {
             It all comes down to one simple thing: <strong>clarity</strong>.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            When you're reading a book by one of the greats and you get smacked
+            When you're reading a book by one of the greats, and you get smacked
             across the face with the most beautiful, evocative and compelling
             word you've ever seen, you don't think, 'wow, that's a long word'.
             You think, 'wow, that's a powerful word'. And you think that because
@@ -66,7 +67,7 @@ export default function Example() {
             conveyed it perfectly.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            Part of that power comes from the fact that they used the word in a
+            Part of the power comes from the fact that they used the word in a
             way you yourself would have never thought to use it, in a place
             where you yourself would have never expected it to be used. But you
             knew the word! You probably knew it since the first grade; you just
@@ -92,10 +93,10 @@ export default function Example() {
             phrases. But it's so much more than that. Let me explain.
           </p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-            The main pain point that inspired me to build this app was the fact
-            that I do all my reading with the Kindle app. I have thousands of
-            highlights split across hundreds of different books. Some of these
-            highlights are words, but some of them are more like phrases or
+            The main pain point that inspired me to build this product was the
+            fact that I do all my reading with the Kindle app. I have thousands
+            of highlights split across hundreds of different books. Some of
+            these clippings are words, but some of them are more like phrases or
             idioms, or words that tend to appear together, and some of them are
             entire passages that for whatever reason I didn't want to forget.
           </p>

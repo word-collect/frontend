@@ -24,7 +24,7 @@ const features = [
   {
     name: 'AI-powered.',
     description:
-      'AWS Bedrock handles term-extraction from a diverse range of sources with varying levels of structure.',
+      'Claude 3 Sonnet handles term-extraction from a diverse range of sources with varying levels of structure.',
     icon: BoltIcon
   },
   {

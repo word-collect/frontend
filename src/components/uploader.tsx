@@ -170,8 +170,8 @@ export const Uploader = () => {
               <p className="mt-2 text-sm/6 text-white/50">
                 If you've got a document with some words or phrases you'd like
                 to extract, upload it here. Works great with Kindle annotations
-                and text files of all kinds, whether they're structured lists of
-                terms or straight-up prose.
+                and text files of all kinds, whether they contain structured
+                lists of terms or free-flowing prose.
               </p>
               <p className="mt-2 text-sm/6 text-white/50">
                 You can also paste in a URL to a vocabulary list, an article, or
