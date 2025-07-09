@@ -53,7 +53,9 @@ export default function ExtractionViewerPush({
       text = `Saved ${latest.saved} words. Redirecting`
       break
     default:
-      text = `Uploading ${fileName}`
+      text = fileName.startsWith('http')
+        ? `Fetching ${fileName}`
+        : `Uploading ${fileName}`
       progress = 1
   }
 
