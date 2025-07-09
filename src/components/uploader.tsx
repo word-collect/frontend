@@ -17,7 +17,6 @@ export const Uploader = () => {
   // upload helper reused by click-select *and* drag-drop
   const handleFile = useCallback(
     async (file: File | undefined) => {
-      console.log('running handleFile')
       if (!file) return
       setFileName(file.name)
       try {
@@ -33,7 +32,6 @@ export const Uploader = () => {
 
   const handleUrlUpload = useCallback(
     async (url: string) => {
-      console.log('running url upload')
       setFileName(url)
       try {
         await uploadUrl(url) // returns the S3 key
