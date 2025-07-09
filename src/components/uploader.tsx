@@ -5,14 +5,7 @@ import { useState, useCallback } from 'react'
 import ExtractionViewerPush from './extraction-viewer-push'
 import { DocumentTextIcon } from '@heroicons/react/20/solid'
 import { useUrlUpload } from '@/hooks/use-url-upload'
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-  Button
-} from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 
 export const Uploader = () => {
   const [fileName, setFileName] = useState<string | null>(null)
@@ -150,7 +143,7 @@ export const Uploader = () => {
             <button
               type="submit"
               disabled={!!fileName}
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Submit
             </button>
@@ -189,12 +182,12 @@ export const Uploader = () => {
                 random and full of jargon off of PubMed and see what happens.
               </p>
               <div className="mt-4">
-                <Button
-                  className="cursor-pointer inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                <button
+                  className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={() => setHelpOpen(false)}
                 >
                   Got it, thanks!
-                </Button>
+                </button>
               </div>
             </DialogPanel>
           </div>
